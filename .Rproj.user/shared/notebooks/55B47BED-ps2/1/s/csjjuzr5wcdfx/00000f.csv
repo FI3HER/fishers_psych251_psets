@@ -1,0 +1,1 @@
+"0","d = read.spss(""data/Tamiretal2008ReplicationData.sav"", to.data.frame=T)"

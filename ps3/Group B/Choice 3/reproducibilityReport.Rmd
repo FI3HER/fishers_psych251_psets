@@ -1,0 +1,160 @@
+---
+title: "Reproducibility Report: Group B Choice 3"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+  pdf_document:
+    toc: yes
+---
+
+-------
+
+For this exercise, please try to reproduce the results from Experiment 2 of the associated paper (de la Fuente, Santiago, Roman, Dumitrache, & Casasanto, 2014). The PDF of the paper is included in the same folder as this Rmd file. 
+
+#### Methods summary: 
+
+Researchers tested the question of whether temporal focus differs between Moroccan and Spanish cultures, hypothesizing that Moroccans are more past-focused, whereas Spaniards are more future-focused. Two groups of participants ($N = 40$ Moroccan and $N=40$ Spanish) completed a temporal-focus questionnaire that contained questions about past-focused ("PAST") and future-focused ("FUTURE") topics. In response to each question, participants provided a rating on a 5-point Likert scale on which lower scores indicated less agreement and higher scores indicated greater agreement. The authors then performed a mixed-design ANOVA with agreement score as the dependent variable, group (Moroccan or Spanish, between-subjects) as the fixed-effects factor, and temporal focus (past or future, within-subjects) as the random effects factor. In addition, the authors performed unpaired two-sample t-tests to determine whether there was a significant difference between the two groups in agreement scores for PAST questions, and whether there was a significant difference in scores for FUTURE questions.
+
+------
+
+#### Target outcomes: 
+
+Below is the specific result you will attempt to reproduce (quoted directly from the results section of Experiment 2):
+
+> According to a mixed analysis of variance (ANOVA) with group (Spanish vs. Moroccan) as a between-subjects factor and temporal focus (past vs. future) as a within-subjectS factor, temporal focus differed significantly between Spaniards and Moroccans, as indicated by a significant interaction of temporal focus and group, F(1, 78) = 19.12, p = .001, ηp2 = .20 (Fig. 2). Moroccans showed greater agreement with past-focused statements than Spaniards did, t(78) = 4.04, p = .001, and Spaniards showed greater agreement with future-focused statements than Moroccans did, t(78) = −3.32, p = .001. (de la Fuente et al., 2014, p. 1685).
+
+------
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, warning=FALSE, message=FALSE)
+```
+
+# Step 1: Load packages
+
+```{r}
+library(tidyverse) # for data munging
+library(knitr) # for kable table formating
+library(haven) # import and export 'SPSS', 'Stata' and 'SAS' Files
+library(readxl) # import excel files
+
+# #optional packages/functions:
+# library(afex) # anova functions
+# library(ez) # anova functions 2
+# library(scales) # for plotting
+# std.err <- function(x) sd(x)/sqrt(length(x)) # standard error
+```
+
+# Step 2: Load data
+
+```{r}
+# Just Experiment 2
+data_path <- 'data/DeLaFuenteEtAl_2014_RawData.xls'
+d <- read_excel(data_path, sheet=3)
+```
+
+# Step 3: Tidy data
+
+```{r}
+d_long <- d %>%
+  rename(
+    focus = subscale,
+    agreement = `Agreement (0=complete disagreement; 5=complete agreement)`
+  ) %>%
+  mutate(
+    focus = tolower(focus),
+    group = recode(group,
+                   "young Spaniard" = "Spaniard")
+  )
+
+head(d_long)
+```
+
+# Step 4: Run analysis
+
+## Pre-processing
+
+```{r}
+str(d_long)
+
+d_long <- d_long %>%
+  mutate(
+    participant = as.factor(participant),
+    group = as.factor(group),
+    focus = as.factor(focus)
+  )
+
+summary(d_long)
+```
+
+## Descriptive statistics
+
+Try to recreate Figure 2 (fig2.png, also included in the same folder as this Rmd file):
+
+```{r}
+library(ggplot2)
+library(dplyr)
+
+summary_stats <- d_long %>%
+  group_by(group, focus) %>%
+  summarise(
+    mean = mean(agreement, na.rm = TRUE),
+    se = sd(agreement, na.rm = TRUE) / sqrt(n())
+  )
+
+ggplot(summary_stats, aes(x = group, y = mean, fill = focus)) +
+  geom_bar(stat = "identity", position = position_dodge(width = 0.9),
+           color = "black") +
+  geom_errorbar(aes(ymin = mean - se, ymax = mean + se),
+                width = 0.2, position = position_dodge(width = 0.9)) +
+  scale_fill_manual(values = c("gray40", "gray80"),
+                    name = NULL,
+                    labels = c("Past-Focused Statements",
+                               "Future-Focused Statements")) +
+  coord_cartesian(ylim = c(2.0, 4.0)) +
+  labs(y = "Rating", x = NULL) +
+  theme_minimal(base_size = 14) +
+  theme(
+    legend.position = "top",
+    legend.text = element_text(size = 12),
+    axis.text.x = element_text(size = 12),
+    axis.title.y = element_text(size = 13)
+  )
+```
+
+## Inferential statistics
+
+> According to a mixed analysis of variance (ANOVA) with group (Spanish vs. Moroccan) as a between-subjects factor and temporal focus (past vs. future) as a within-subjects factor, temporal focus differed significantly between Spaniards and Moroccans, as indicated by a significant interaction of temporal focus and group, F(1, 78) = 19.12, p = .001, ηp2 = .20 (Fig. 2).
+
+```{r}
+#hit time limit
+
+```
+
+> Moroccans showed greater agreement with past-focused statements than Spaniards did, t(78) = 4.04, p = .001, 
+
+```{r}
+#hit time limit
+
+```
+
+> and Spaniards showed greater agreement with future-focused statements than Moroccans did, t(78) = −3.32, p = .001.(de la Fuente et al., 2014, p. 1685)
+
+```{r}
+#hit time limit
+
+```
+
+# Step 5: Reflection
+
+Were you able to reproduce the results you attempted to reproduce? If not, what part(s) were you unable to reproduce?
+
+> I spent most of my time looking into how to produce the above graph, which was very feasible with the given data and materials. Even though I didn't get time to reproduce the simpler ANOVA and T-test inferential statistics, it looks like they would have been extremely feasible as well because of how well maintained the raw_data excel sheet was. 
+
+How difficult was it to reproduce your results? 
+
+> The image definitely took some time and required help, but there was a fair share of formating which is difficult to reproduce identically. 
+
+What aspects made it difficult? What aspects made it easy?
+
+> I thought the raw data excel sheet was very well maintained. It made it easy to parse through the results and create the descriptive statistics. Each data sheet had clearly labled tabs inside of it with their own well defined column names. Additionally, there was even a table of contents to further describe what each variable name was referring to, which I thought was a great rule of thumb that should be mandated for studies that even have the chance to be reproduced. 

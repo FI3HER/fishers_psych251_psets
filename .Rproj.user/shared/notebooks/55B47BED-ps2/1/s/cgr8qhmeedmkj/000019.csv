@@ -1,0 +1,3 @@
+"0","performance_hyp_long_d %>% "
+"0","  group_by(ConfrontationalGame) %>%"
+"0","  summarize(AvgScore = mean(Score, na.rm=T)) # the na.rm tells R to ignore NA values"

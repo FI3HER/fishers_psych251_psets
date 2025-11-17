@@ -1,0 +1,1 @@
+"0","tiny_demo_d = head(performance_hyp_d, 2) # get just the first two subjects performance data, for a demo"

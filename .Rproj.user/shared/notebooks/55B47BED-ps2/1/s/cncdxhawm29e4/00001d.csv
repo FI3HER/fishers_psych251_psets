@@ -1,0 +1,3 @@
+"0","tiny_demo_d %>% pivot_longer(cols=-c(""Subject"", ""Cond""), # this tells it to transform all columns *except* these ones"
+"0","                             names_to='Measurement', "
+"0","                             values_to='Value')"

@@ -1,0 +1,6 @@
+"0","performance_hyp_long_d = performance_hyp_d %>%"
+"0","  pivot_longer(cols=-c(""Subject"", ""Cond""),"
+"0","               names_to='Measurement', "
+"0","               values_to='Score')"
+"0",""
+"0","head(performance_hyp_long_d)"

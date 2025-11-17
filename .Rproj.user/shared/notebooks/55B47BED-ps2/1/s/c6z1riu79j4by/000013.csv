@@ -1,0 +1,3 @@
+"0","rating_summary_d = rating_hyp_long_d %>% "
+"0","  group_by(Emotion, Measurement, ConfrontationalGame) %>%"
+"0","  summarize(MeanRating = mean(Rating))"

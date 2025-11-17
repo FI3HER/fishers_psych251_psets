@@ -1,0 +1,5 @@
+"0","rating_hyp_d = filtered_d %>% "
+"0","  filter(is.na(DoNotUseVideoGamePerformanceData)) %>% # first, let's get rid of the subjects who did so poorly on one game that their data is unusable"
+"0","  select(-DoNotUseVideoGamePerformanceData, # now get rid of that column"
+"0","         -starts_with(""DinerDash""), # and the other columns we don't need"
+"0","         -starts_with(""SOF""))"

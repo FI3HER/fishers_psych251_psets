@@ -1,0 +1,3 @@
+"0","ggplot(rating_summary_d, aes(x=ConfrontationalGame, y=MeanRating, fill=Emotion)) +"
+"0","  geom_bar(position=""dodge"", stat=""identity"") + "
+"0","  scale_fill_brewer(palette=""Set1"")"

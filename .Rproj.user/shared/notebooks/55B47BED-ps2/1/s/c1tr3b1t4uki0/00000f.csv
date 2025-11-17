@@ -1,0 +1,8 @@
+"0","rating_hyp_long_d = rating_hyp_long_d %>%"
+"0","  mutate("
+"0","    GameNumber = as.numeric(substr(rating_hyp_long_d$Measurement, 5, 5)),"
+"0","    ConfrontationalGame = GameNumber <= 2, # in a mutate, we can use a column we created (or changed) right away. Games 1 and 2 are confrontational, games 3 and 4 are not."
+"0","    Emotion = str_extract(Measurement, ""Angry|Neutral|Excited|Exciting|Calm""),"
+"0","    Emotion = ifelse(Emotion == ""Excited"", ""Exciting"", # this just gets rid of some annoying labeling choices"
+"0","              ifelse(Emotion == ""Calm"", ""Neutral"", Emotion))"
+"0","    ) "

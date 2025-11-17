@@ -1,0 +1,5 @@
+"0","performance_hyp_long_d = performance_hyp_long_d %>% "
+"0","  mutate(ConfrontationalGame = grepl(""SOF"", Measurement), # create a new variable that will say whether the measurement was of the game soldier of fortune (SOF)."
+"0","         WithMusic = !grepl(""NoMusic|WithoutMusic"", Measurement), # creates a new column named WithMusic, which is False if the measurement contains *either* ""NoMusic"" or ""WithoutMusic"""
+"0","         MusicCondition = factor(ifelse(Cond > 3, Cond-3, Cond), levels = 1:3, labels = c(""Anger"", ""Exciting"", ""Neutral""))) # Get rid of uninterpretable condition labels"
+"0",""
