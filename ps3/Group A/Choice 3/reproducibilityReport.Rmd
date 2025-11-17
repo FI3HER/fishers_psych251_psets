@@ -85,6 +85,7 @@ d <- data %>%
 > Time-rich participants rated the loss as more expensive when they thought about a small account (M = 8.31, 95% CI = [7.78, 8.84]) than when they thought about a large account (M = 6.50, 95% CI = [5.42, 7.58]), whereas time-poor participants’ evaluations did not differ between the small-account condition (M = 8.33, 95% CI = [7.14, 9.52]) and the large- account condition (M = 8.83, 95% CI = [7.97, 9.69]). (Shah, Shafir, & Mullainathan, 2015, p. 408)
 
 ```{r}
+<<<<<<< HEAD
 library(dplyr)
 
 excluded <- 16
@@ -111,6 +112,10 @@ d_summary <- d %>%
   )
 
 knitr::kable(d_summary, digits = 2)
+=======
+# reproduce the above results here
+
+>>>>>>> 825979caa6a323765c352d5f345bb4a03e809f0c
 ```
 
 ## Inferential statistics
@@ -118,6 +123,7 @@ knitr::kable(d_summary, digits = 2)
 > A 2 (scarcity condition) × 2 (account condition) analysis of variance revealed a significant interaction, F(1, 69) = 5.16, p < .05, ηp2 = .07.
 
 ```{r}
+<<<<<<< HEAD
 anova_result <- aov(expense ~ scarcity * account, data = d)
 summary(anova_result)
 
@@ -127,12 +133,17 @@ SS_resid  <- anova_table["Residuals", "Sum Sq"]
 
 eta_p2 <- SS_effect / (SS_effect + SS_resid)
 eta_p2
+=======
+# reproduce the above results here
+
+>>>>>>> 825979caa6a323765c352d5f345bb4a03e809f0c
 ```
 
 # Step 5: Reflection
 
 Were you able to reproduce the results you attempted to reproduce? If not, what part(s) were you unable to reproduce?
 
+<<<<<<< HEAD
 > Yes, I was able to reproduce the descriptive and inferential statistics from this aricle. 
 
 How difficult was it to reproduce your results? 
@@ -142,3 +153,14 @@ How difficult was it to reproduce your results?
 What aspects made it difficult? What aspects made it easy?
 
 > I personally found it very difficult to read and interpret the "study 6-accessible-feud" excel sheet. There were multiple pages with extremely similar looking data, as well as an entire page conveniently named "sheet 2." This made it practically impossible to tell what data the page contained, as well as how it differed from the previous pages. Also, the lables are in differing orders on each page, with some organized by condition, some by subject, and others by time used. As a whole though, the reproduction was possible and that is a testament to the authors abiding by open source guidlines and publishing their data. 
+=======
+> ANSWER HERE
+
+How difficult was it to reproduce your results? 
+
+> ANSWER HERE
+
+What aspects made it difficult? What aspects made it easy?
+
+> ANSWER HERE
+>>>>>>> 825979caa6a323765c352d5f345bb4a03e809f0c

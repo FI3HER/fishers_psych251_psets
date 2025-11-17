@@ -68,9 +68,15 @@ Reproduce the behavioral result that `vid.num` is influenced by `treat`! (Figure
 Build out this simple stub code. 
 
 ```{r}
+<<<<<<< HEAD
 k1_df %>%
   group_by(treat) %>%
   summarise(...) %>%
+=======
+k1_df |>
+  group_by(treat) |>
+  summarise(...) |>
+>>>>>>> 825979caa6a323765c352d5f345bb4a03e809f0c
   ggplot(...) 
 ```
 

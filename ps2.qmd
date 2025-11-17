@@ -1,7 +1,12 @@
 ---
 title: "Psych 251 PS2: Tidying Data"
+<<<<<<< HEAD
 author: "Fisher Anderson"
 date: "October 12, 2025"
+=======
+author: "Andrew Lampinen"
+date: "September 27, 2018"
+>>>>>>> 825979caa6a323765c352d5f345bb4a03e809f0c
 format:
   html:
     toc: true
@@ -35,7 +40,11 @@ d = read.spss("data/Tamiretal2008ReplicationData.sav", to.data.frame=T)
 Take a look at the data structure:
 
 ```{r}
+<<<<<<< HEAD
 #head(d)
+=======
+head(d)
+>>>>>>> 825979caa6a323765c352d5f345bb4a03e809f0c
 ```
 
 This data is what we call **wide form** -- each subject is a single row, and the columns represent different observations. This is a somewhat inconvenient way of representing the data, for example if we wanted to do the same operation to each likert rating (for example normalize it to be in the range 0-1), we'd have to do it on each of the 40 or so rating columns. To avoid this, our eventual goal will be to convert the data into **long form**, where each row is a single observation. 
@@ -43,18 +52,31 @@ This data is what we call **wide form** -- each subject is a single row, and the
 For now, take a look at the column names to get a better idea of what all is in the dataset.
 
 ```{r}
+<<<<<<< HEAD
 #colnames(d)
+=======
+colnames(d)
+>>>>>>> 825979caa6a323765c352d5f345bb4a03e809f0c
 ```
 
 And see if you can figure out what range the likert scores are in. What's the highest number on the likert scale, and what's the lowest? (Hint, `d$Game1Angry1` is one of the likert rating columns, and you may want to use `unique` or `range` or `hist`)
 
 ```{r}
+<<<<<<< HEAD
 hist(d$Game1Angry1)
 
 ```
 
 Highest number: 1
 Lowest number: 7
+=======
+## your code here
+
+```
+
+Highest number: [Your answer here]
+Lowest number: [Your answer here]
+>>>>>>> 825979caa6a323765c352d5f345bb4a03e809f0c
 
 # cleaning up a bit
 
@@ -71,7 +93,11 @@ First, we need to `filter` out any rows that should be excluded. According to th
 You can see participant 23's data and the fact that they did not do part 1 by looking at the last rows of the dataframe:
 
 ```{r}
+<<<<<<< HEAD
 #tail(d)
+=======
+tail(d)
+>>>>>>> 825979caa6a323765c352d5f345bb4a03e809f0c
 ```
 
 Notice that participant 23 has missing values for part 1.
@@ -79,9 +105,14 @@ Notice that participant 23 has missing values for part 1.
 The researchers have made a column called `DoNotUse` based on their exclusion criteria. Use this column to filter the dataframe! (hint: this is a little trickier than it might be because of how R treats NA values. You may want to use `?unique` to check values in the column and check out `?is.na`.)
 
 ```{r}
+<<<<<<< HEAD
 unique(d$DoNotUse)
 filtered_d = d %>% 
   filter(is.na(DoNotUse) | !DoNotUse)
+=======
+filtered_d = d %>% 
+  filter(   ) # your code here: exclude subjects that are marked as "DoNotUse"
+>>>>>>> 825979caa6a323765c352d5f345bb4a03e809f0c
 ```
 
 It's good practice to assign a new variable name (in this case `filtered_d`) to a data frame when you change it in an important way, or apply a code chunk that shouldn't be run twice. This helps prevent you seeing different results when you run your code in chunks (and might run one multiple times, or skip it, etc.) vs. knit the document.
@@ -118,7 +149,11 @@ Now you try! Fill in the selection criteria to get rid of the "Game" columns, wh
 
 ```{r}
 performance_hyp_d = filtered_d %>% 
+<<<<<<< HEAD
   select( -contains("Game") )
+=======
+  select( ) # your code here: remove the columns containing "Game" in the name
+>>>>>>> 825979caa6a323765c352d5f345bb4a03e809f0c
 ```
 
 # Converting to long form
@@ -158,9 +193,13 @@ And you can convert the rating dataset! (Call the "Key" column "Measurement" and
 
 ```{r}
 rating_hyp_long_d = rating_hyp_d %>%
+<<<<<<< HEAD
   pivot_longer(cols = -c("Subject", "Cond"),
                names_to = 'Measurement', 
                values_to = 'Rating')  
+=======
+  ## your code here
+>>>>>>> 825979caa6a323765c352d5f345bb4a03e809f0c
 
 head(rating_hyp_long_d)
 ```
@@ -182,7 +221,11 @@ Now you can help! For the rating dataset, write a test on a measurement name, us
 ```{r}
 rating_hyp_long_d = rating_hyp_long_d %>%
   mutate(
+<<<<<<< HEAD
     IsRecall = grepl("Friends|Strangers", Measurement)
+=======
+    IsRecall = ,## Your code here
+>>>>>>> 825979caa6a323765c352d5f345bb4a03e809f0c
   )
 ```
 
@@ -230,8 +273,12 @@ The rating hypothesis analysis also requires some grouped manipulation. The expe
 
 ```{r}
 rating_summary_d = rating_hyp_long_d %>% 
+<<<<<<< HEAD
   group_by(Emotion, Measurement, ConfrontationalGame) %>%
   summarize(MeanRating = mean(Rating))
+=======
+  ## your code here
+>>>>>>> 825979caa6a323765c352d5f345bb4a03e809f0c
 ```
 
 Let's take a look at the result:
@@ -284,8 +331,12 @@ Now we're finally to reproduce Fig. 2 from Tamir et al., we just need to get the
 
 ```{r}
 performance_diff_summary_d = performance_diff_d %>%
+<<<<<<< HEAD
   group_by(ConfrontationalGame, MusicCondition) %>%  
   summarize(MeanImprovementScore = mean(ImprovementScore, na.rm = TRUE))
+=======
+  ## Your code here
+>>>>>>> 825979caa6a323765c352d5f345bb4a03e809f0c
 ```
 
 Let's take a look at your result (if it has `NA` values, how can you fix it?):

@@ -1,3 +1,0 @@
-"0","performance_diff_summary_d = performance_diff_d %>%"
-"0","  group_by(ConfrontationalGame, MusicCondition) %>%  "
-"0","  summarize(MeanImprovementScore = mean(ImprovementScore, na.rm = TRUE))"
